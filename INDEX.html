@@ -1,1 +1,318 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>[NOMBRE_EMPRESA] · Maderera</title>
+  <meta name="description" content="[NOMBRE_EMPRESA] · Soluciones en madera: tableros, vigas, decks y carpintería a medida en [CIUDAD]." />
+  <style>
+    :root{
+      --bg:#0f172a;         /* azul pizarra oscuro */
+      --card:#111827;       /* gris oscuro */
+      --text:#e5e7eb;       /* gris claro */
+      --muted:#9ca3af;      /* gris medio */
+      --brand:#22c55e;      /* verde marca */
+      --brand-2:#16a34a;    /* verde más oscuro */
+      --accent:#f59e0b;     /* ámbar para detalles */
+      --radius:16px;
+      --shadow:0 10px 30px rgba(0,0,0,.25);
+      --maxw:1100px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Helvetica,Arial,sans-serif;background:linear-gradient(180deg,#0b1025,#0f172a 40%,#0b1025);color:var(--text);}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+    header{position:sticky;top:0;z-index:50;background:rgba(15,23,42,.7);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.07)}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:36px;height:36px;border-radius:8px;background:conic-gradient(from 180deg at 50% 50%, #14532d, #22c55e, #86efac);box-shadow:inset 0 0 18px rgba(0,0,0,.35)}
+    .brand h1{font-size:18px;margin:0;letter-spacing:.3px}
+    nav ul{list-style:none;display:flex;gap:18px;margin:0;padding:0}
+    .cta{display:inline-flex;align-items:center;gap:10px;background:var(--brand);padding:10px 16px;border-radius:999px;color:#04130a;font-weight:600;box-shadow:var(--shadow)}
+    .cta:hover{background:var(--brand-2)}
+    .menu-btn{display:none}
+
+    /* Hero */
+    .hero{padding:64px 0 36px}
+    .hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:26px;align-items:center}
+    .badge{display:inline-flex;align-items:center;gap:8px;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.35);color:#bbf7d0;padding:6px 10px;border-radius:999px;font-size:12px}
+    .hero h2{font-size:40px;line-height:1.1;margin:14px 0}
+    .hero p{color:var(--muted);max-width:55ch}
+    .hero-cards{display:grid;grid-template-columns:1fr;gap:16px}
+    .card{background:linear-gradient(180deg,#0f172a,#0b132a);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+    .card h3{margin:0 0 6px;font-size:16px}
+    .chip{display:inline-block;color:#fef3c7;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.35);padding:2px 8px;border-radius:999px;font-size:12px;margin-left:8px}
+
+    /* Secciones */
+    section{padding:48px 0;border-top:1px solid rgba(255,255,255,.06)}
+    .section-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+    .section-title h3{margin:0;font-size:22px}
+    .grid{display:grid;gap:18px}
+    .grid-3{grid-template-columns:repeat(3,1fr)}
+    .grid-2{grid-template-columns:repeat(2,1fr)}
+    .feature{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:18px}
+    .feature h4{margin:8px 0 6px}
+    .muted{color:var(--muted)}
+
+    /* Destacado */
+    .highlight{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center}
+    .highlight .panel{background:radial-gradient(60% 100% at 10% 0%, rgba(34,197,94,.14), transparent 60%), var(--card);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:22px}
+
+    /* Contacto */
+    .contact{display:grid;grid-template-columns:1.1fr .9fr;gap:20px}
+    form{display:grid;gap:12px}
+    input, textarea{width:100%;background:#0b1225;border:1px solid rgba(255,255,255,.12);color:var(--text);padding:12px 14px;border-radius:12px}
+    textarea{min-height:120px;resize:vertical}
+    .btn{background:var(--brand);border:0;color:#04240f;border-radius:12px;padding:12px 16px;font-weight:700;cursor:pointer}
+    .btn:hover{background:var(--brand-2)}
+    .map{height:100%;min-height:260px;border:0;filter:saturate(.9) contrast(1.05) brightness(.95);border-radius:var(--radius);box-shadow:var(--shadow)}
+
+    footer{padding:28px 0;color:var(--muted)}
+
+    /* Responsive */
+    @media (max-width: 900px){
+      .hero-grid, .highlight, .contact{grid-template-columns:1fr}
+      .grid-3{grid-template-columns:1fr 1fr}
+      nav ul{display:none}
+      .menu-btn{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.15);padding:8px 12px;border-radius:10px}
+      .nav.open nav ul{display:flex;flex-direction:column;position:absolute;top:56px;left:0;right:0;background:#0b1225;border-top:1px solid rgba(255,255,255,.06);padding:12px 20px}
+    }
+    @media (max-width: 600px){
+      .grid-3{grid-template-columns:1fr}
+      .hero h2{font-size:32px}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav" id="topnav">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <h1>[NOMBRE_EMPRESA]</h1>
+      </div>
+      <nav aria-label="Principal">
+        <ul>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#productos">Productos</a></li>
+          <li><a href="#proceso">Proceso</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+      <a class="cta" href="https://wa.me/[WHATSAPP_NUM_CON_CODIGO]" target="_blank" rel="noopener">WhatsApp</a>
+      <button class="menu-btn" id="menubtn" aria-label="Abrir menú">☰ Menú</button>
+    </div>
+  </header>
+
+  <main>
+<!-- HERO: imagen de fondo detrás del título -->
+<section class="hero">
+  <div class="hero__wrap">
+    <div class="hero__bg" aria-hidden="true"
+         style="background:
+           linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.35)),
+           url('[URL_IMAGEN_HERO]') center/cover no-repeat;">
+    </div>
+    <div class="hero__content">
+      <div class="hero__inner">
+        <span class="badge">Maderera en [CIUDAD] · +[AÑOS] años</span>
+        <h2>Soluciones en madera para <span style="color:#ffd60a">obras y proyectos</span>.</h2>
+        <p>En <strong>[NOMBRE_EMPRESA]</strong> ofrecemos tableros, vigas, decks, machimbres y carpintería a medida.</p>
+        <div class="actions">
+          <a class="cta" href="#contacto">Pedí presupuesto</a>
+          <a class="btn-ghost" href="#productos">Ver catálogo</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    <!-- SERVICIOS -->
+ <section id="servicios" data-reveal>
+  <div class="container">
+    <div class="section-title">
+      <h3>Servicios</h3>
+      <span class="muted">Corte · Cepillado · Tratamientos</span>
+    </div>
+    <div class="grid grid-3">
+      <article class="card">
+        <img class="card-img" src="[URL_IMG_SERVICIO_1]" alt="Cortes y dimensionado">
+        <div class="body">
+          <h4>Cortes y dimensionado</h4>
+          <p class="muted">Cortes rectos y a medida para tableros y vigas.</p>
+        </div>
+      </article>
+      <article class="card">
+        <img class="card-img" src="[URL_IMG_SERVICIO_2]" alt="Carpintería a medida">
+        <div class="body">
+          <h4>Carpintería a medida</h4>
+          <p class="muted">Mesadas, estanterías, puertas y muebles.</p>
+        </div>
+      </article>
+      <article class="card">
+        <img class="card-img" src="[URL_IMG_SERVICIO_3]" alt="Tratamientos y acabados">
+        <div class="body">
+          <h4>Tratamientos y acabados</h4>
+          <p class="muted">Barnices, aceites e inmunizado.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+    <!-- PRODUCTOS -->
+ <section id="productos" data-reveal>
+  <div class="container">
+    <div class="section-title">
+      <h3>Productos</h3>
+      <a class="cta" href="#contacto">Solicitar lista de precios</a>
+    </div>
+    <div class="grid grid-3">
+      <article class="card">
+        <img class="card-img" src="[URL_IMG_PRODUCTO_1]" alt="Tableros">
+        <div class="body">
+          <h4>Tableros</h4>
+          <p class="muted">Pino, eucalipto, MDF y fenólicos.</p>
+        </div>
+      </article>
+      <article class="card">
+        <img class="card-img" src="[URL_IMG_PRODUCTO_2]" alt="Vigas y listones">
+        <div class="body">
+          <h4>Vigas y listones</h4>
+          <p class="muted">Estructurales y decorativos.</p>
+        </div>
+      </article>
+      <article class="card">
+        <img class="card-img" src="[URL_IMG_PRODUCTO_3]" alt="Decks y machimbres">
+        <div class="body">
+          <h4>Decks y machimbres</h4>
+          <p class="muted">Para exterior e interior.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+    <!-- DIFERENCIALES / PROCESO -->
+    <section id="proceso">
+      <div class="container highlight">
+        <div class="panel">
+          <h3>¿Por qué elegirnos?</h3>
+          <ul class="muted">
+            <li>Stock permanente en [CATEGORÍAS_CLAVE].</li>
+            <li>Asesoramiento técnico personalizado.</li>
+            <li>Origen responsable y garantía de calidad.</li>
+            <li>Entrega rápida con seguimiento.</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Nuestro proceso</h3>
+          <ol class="muted">
+            <li>Contanos tu proyecto (medidas/uso).</li>
+            <li>Te enviamos cotización y plazo.</li>
+            <li>Producción y control de calidad.</li>
+            <li>Entrega o retiro en sucursal.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIOS (opcional) -->
+    <section>
+      <div class="container">
+        <div class="section-title">
+          <h3>Testimonios</h3>
+          <span class="muted">Lo que dicen nuestros clientes</span>
+        </div>
+        <div class="grid grid-3">
+          <article class="feature">
+            <p>“Excelente calidad y atención. Cumplieron los plazos.”</p>
+            <p class="muted">— [NOMBRE_CLIENTE], Arquitecta</p>
+          </article>
+          <article class="feature">
+            <p>“Nos asesoraron para elegir las maderas ideales para exterior.”</p>
+            <p class="muted">— [NOMBRE_CLIENTE], Constructor</p>
+          </article>
+          <article class="feature">
+            <p>“Muy prolijos en los cortes y el embalaje. Recomendados.”</p>
+            <p class="muted">— [NOMBRE_CLIENTE], Carpintero</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto">
+      <div class="container contact">
+        <div>
+          <h3>Contacto</h3>
+          <p class="muted">Completá el formulario y te respondemos en el día hábil. También podés escribirnos por WhatsApp o email.</p>
+          <form id="contactForm">
+            <input type="text" name="nombre" placeholder="Tu nombre" required />
+            <input type="email" name="email" placeholder="Tu email" required />
+            <input type="tel" name="telefono" placeholder="Tu teléfono (opcional)" />
+            <textarea name="mensaje" placeholder="Contanos qué necesitás" required></textarea>
+            <button class="btn" type="submit">Enviar</button>
+            <p id="formMsg" class="muted" aria-live="polite"></p>
+          </form>
+          <div style="margin-top:16px;display:flex;gap:12px;flex-wrap:wrap">
+            <a class="cta" href="mailto:[EMAIL_EMPRESA]">[EMAIL_EMPRESA]</a>
+            <a class="cta" href="https://wa.me/[WHATSAPP_NUM_CON_CODIGO]" target="_blank" rel="noopener">WhatsApp</a>
+          </div>
+          <p class="muted" style="margin-top:10px">
+            Dirección: [DIRECCION], [CIUDAD]. Horario: [HORARIO]. CUIT/RUC: [CUIT].
+          </p>
+        </div>
+        <div>
+          <!-- Reemplazá el src por tu mapa embebido de Google Maps -->
+          <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.048!2d-58.3816!3d-34.6037!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zQ2VudHJv!5e0!3m2!1ses-419!2sar!4v00000000000" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa [NOMBRE_EMPRESA]"></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+      <small>© <span id="year"></span> [NOMBRE_EMPRESA]. Todos los derechos reservados.</small>
+      <small class="muted">Hecho con ♥ en [CIUDAD].</small>
+    </div>
+  </footer>
+
+  <script>
+    // Año dinámico
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Menú móvil
+    const nav = document.getElementById('topnav');
+    const menubtn = document.getElementById('menubtn');
+    menubtn?.addEventListener('click',()=>{
+      nav.classList.toggle('open');
+    });
+
+    // Formulario (simulado). Reemplazá por tu backend o servicio de formularios.
+    const form = document.getElementById('contactForm');
+    const msg = document.getElementById('formMsg');
+    form?.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form).entries());
+      // TODO: Integrar con EmailJS, Formspree o tu backend
+      msg.textContent = '¡Gracias, ' + (data.nombre||'') + '! Tu mensaje fue enviado (demo).';
+      form.reset();
+    });
+  </script>
+
+  <!--
+  ==========================================
+  Cómo personalizar (TODOs)
+  1) Reemplazá los placeholders entre corchetes: [NOMBRE_EMPRESA], [CIUDAD], [EMAIL_EMPRESA], [WHATSAPP_NUM_CON_CODIGO], etc.
+  2) Colores: ajustá variables CSS en :root (—brand, —bg, etc.).
+  3) Mapa: pegá el iframe de Google Maps de tu dirección real.
+  4) Formularios: conectá con EmailJS/Formspree o backend propio.
+  5) SEO: editá <title> y meta description.
+  ==========================================
+  -->
+</body>
+</html>
 
